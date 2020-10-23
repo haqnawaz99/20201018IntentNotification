@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class  ListViewActivity extends AppCompatActivity {
@@ -39,17 +43,24 @@ public class  ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String newName =  et_value.getText().toString();
+                 names.add(newName);
 
-                names.add(newName);
+                 //###
+                Collections.sort(names);
+
                 ad.notifyDataSetChanged();
+            }
+        });
 
+        lv_names.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
-
+                Toast.makeText(ListViewActivity.this, "The name at posision " + i + " is " + names.get(i), Toast.LENGTH_SHORT).show();
             }
         });
 
 
-
     }
+
 }
